@@ -52,7 +52,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/next360/"
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
