@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="NEXT360 Organic Products logo">
+  <circle cx="100" cy="100" r="96" fill="#F8F7F1" stroke="#20252B" stroke-width="5"/>
+  <circle cx="100" cy="100" r="85" fill="none" stroke="#557A45" stroke-width="1.5" opacity="0.55"/>
+  <path d="M100 62 C 86 62 77 71 75 86 C 73 101 82 114 100 120 C 118 114 127 101 125 86 C 123 71 114 62 100 62 Z" fill="#557A45"/>
+  <path d="M100 65 C 96.5 82 96.5 102 100 117" stroke="#F8F7F1" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M100 119 C 98 125 96 129 92 133" stroke="#3F6035" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="100" y="158" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" letter-spacing="3" fill="#20252B">NEXT360</text>
+  <text x="100" y="174" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="7.5" letter-spacing="3" fill="#697067">ORGANIC PRODUCTS</text>
+</svg>

@@ -1,0 +1,51 @@
+<article class="card">
+  <div class="card__media">
+    <a class="card__image-link" [routerLink]="['/products', product().slug]" [attr.aria-label]="product().name">
+      <img [src]="product().image" [alt]="product().name" loading="lazy" class="card__image" />
+    </a>
+    @if (product().badge) {
+      <span class="card__badge" [class.card__badge--dark]="product().organic">{{ product().badge }}</span>
+    }
+    <button
+      class="card__wish"
+      (click)="toggleWish($event)"
+      [attr.aria-label]="wishAriaLabel()"
+      [attr.aria-pressed]="isWishlisted()"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        [attr.fill]="isWishlisted() ? 'currentColor' : 'none'"
+        stroke="currentColor"
+        stroke-width="1.8"
+        aria-hidden="true"
+      >
+        <path d="M12 20.5 4.8 13.3a4.6 4.6 0 0 1 0-6.5 4.6 4.6 0 0 1 6.5 0l.7.7.7-.7a4.6 4.6 0 0 1 6.5 6.5L12 20.5Z"></path>
+      </svg>
+    </button>
+    <button class="card__add" (click)="addToCart($event)" [disabled]="!product().inStock">
+      <span>{{ product().inStock ? 'Add to Cart' : 'Out of Stock' }}</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="card__body">
+    <p class="card__category">{{ product().categoryName }}</p>
+    <a class="card__name" [routerLink]="['/products', product().slug]">{{ product().name }}</a>
+
+    <div class="card__rating">
+      <span class="stars" aria-hidden="true">
+        <span class="stars__fill" [style.width.%]="ratingWidth()"></span>
+      </span>
+      <span class="card__rating-value">{{ product().rating }}</span>
+    </div>
+
+    <div class="card__price">
+      <span class="card__price-current">₹{{ product().price | number }}</span>
+      @if (product().originalPrice) {
+        <span class="card__price-old">₹{{ product().originalPrice | number }}</span>
+      }
+    </div>
+  </div>
+</article>

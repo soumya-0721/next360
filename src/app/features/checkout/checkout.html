@@ -1,0 +1,123 @@
+@if (placed()) {
+  <div class="container checkout-state">
+    <div class="checkout-state__icon" aria-hidden="true">✓</div>
+    <h1>Thank you, order placed!</h1>
+    <p>
+      Your order <strong>{{ orderId() }}</strong> has been placed successfully.
+      A confirmation will be sent to your registered contact.
+    </p>
+    <a routerLink="/shop" class="btn btn--primary">Continue Shopping</a>
+  </div>
+} @else if (cartService.isEmpty()) {
+  <div class="container checkout-state">
+    <h1>Your Cart is Empty</h1>
+    <p>Add something naturally good before checking out.</p>
+    <a routerLink="/shop" class="btn btn--primary">Shop Products</a>
+  </div>
+} @else {
+  <div class="container checkout">
+    <h1>Checkout</h1>
+
+    <div class="checkout__layout">
+      <form class="checkout__form" (submit)="placeOrder($event)">
+        <h2>Delivery Information</h2>
+        <div class="checkout__fields">
+          <div class="field">
+            <label for="checkout-name">Name</label>
+            <input id="checkout-name" class="input" type="text" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="checkout-phone">Phone</label>
+            <input id="checkout-phone" class="input" type="tel" name="phone" autocomplete="tel" required />
+          </div>
+          <div class="field field--full">
+            <label for="checkout-address">Address</label>
+            <textarea id="checkout-address" class="textarea" name="address" required></textarea>
+          </div>
+          <div class="field">
+            <label for="checkout-city">City</label>
+            <input id="checkout-city" class="input" type="text" name="city" required />
+          </div>
+          <div class="field">
+            <label for="checkout-state">State</label>
+            <input id="checkout-state" class="input" type="text" name="state" required />
+          </div>
+          <div class="field">
+            <label for="checkout-pincode">Pincode</label>
+            <input id="checkout-pincode" class="input" type="text" name="pincode" inputmode="numeric" required />
+          </div>
+        </div>
+
+        <h2>Payment</h2>
+        <div class="payment">
+          <label class="payment__option">
+            <input
+              type="radio"
+              name="payment"
+              value="cod"
+              [checked]="payment() === 'cod'"
+              (change)="onPaymentChange($event)"
+            />
+            <span>Cash on Delivery</span>
+          </label>
+          <label class="payment__option">
+            <input
+              type="radio"
+              name="payment"
+              value="upi"
+              [checked]="payment() === 'upi'"
+              (change)="onPaymentChange($event)"
+            />
+            <span>UPI</span>
+          </label>
+          <label class="payment__option">
+            <input
+              type="radio"
+              name="payment"
+              value="card"
+              [checked]="payment() === 'card'"
+              (change)="onPaymentChange($event)"
+            />
+            <span>Card</span>
+          </label>
+        </div>
+
+        @if (error()) {
+          <p class="form-error" role="alert">{{ error() }}</p>
+        }
+
+        <button class="btn btn--primary btn--block checkout__submit" type="submit">Place Order</button>
+      </form>
+
+      <aside class="checkout__summary" aria-label="Order summary">
+        <h2>Order Summary</h2>
+        @for (item of cartService.items(); track item.product.slug) {
+          <div class="checkout__item">
+            <img [src]="item.product.image" [alt]="item.product.name" class="checkout__item-image" />
+            <div class="checkout__item-info">
+              <p class="checkout__item-name">{{ item.product.name }}</p>
+              <p class="checkout__item-meta">Qty {{ item.quantity }}</p>
+            </div>
+            <span class="checkout__item-price">₹{{ item.product.price * item.quantity | number }}</span>
+          </div>
+        }
+        <div class="checkout__row">
+          <span>Subtotal</span>
+          <span>₹{{ cartService.subtotal() | number }}</span>
+        </div>
+        <div class="checkout__row">
+          <span>Delivery</span>
+          @if (cartService.delivery() === 0) {
+            <span>Free</span>
+          } @else {
+            <span>₹{{ cartService.delivery() | number }}</span>
+          }
+        </div>
+        <div class="checkout__row checkout__row--total">
+          <span>Total</span>
+          <span>₹{{ cartService.total() | number }}</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+}

@@ -1,0 +1,37 @@
+.category-detail {
+  padding: 48px 0 88px;
+}
+
+.category-detail__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.category-detail__count {
+  color: var(--color-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.category-detail__empty {
+  text-align: center;
+  padding: 72px 24px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.category-detail__empty h2 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.category-detail__empty p {
+  color: var(--color-muted);
+  margin-bottom: 24px;
+}
+
+.category-detail__empty--notfound {
+  margin: 48px 0 88px;
+}

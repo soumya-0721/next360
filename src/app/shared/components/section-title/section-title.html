@@ -1,0 +1,9 @@
+<div class="section-title" [class.section-title--left]="align() === 'left'">
+  @if (eyebrow()) {
+    <p class="section-title__eyebrow">{{ eyebrow() }}</p>
+  }
+  <h2 class="section-title__heading">{{ title() }}</h2>
+  @if (subtitle()) {
+    <p class="section-title__subtitle">{{ subtitle() }}</p>
+  }
+</div>

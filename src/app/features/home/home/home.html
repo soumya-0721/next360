@@ -1,0 +1,234 @@
+<!-- ===================== HERO ===================== -->
+<section class="hero" #hero (mousemove)="onHeroMove($event)" (mouseleave)="onHeroLeave()">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="hero__eyebrow">Pure • Natural • Conscious</p>
+      <h1 class="hero__heading">
+        <span class="hero__line">Goodness</span>
+        <span class="hero__line">from <span class="text-green">Nature</span>,</span>
+        <span class="hero__line">for You.</span>
+      </h1>
+      <p class="hero__text">Thoughtfully selected organic products for a naturally better everyday life.</p>
+      <div class="hero__cta-row">
+        <a routerLink="/shop" class="btn btn--primary hero__cta">
+          Shop Organic Products
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </a>
+        <a routerLink="/about" class="btn btn--outline hero__cta-secondary">Explore Our Story</a>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__layers">
+        <div class="hero__layer hero__layer--base hero__enter--1">
+          <img src="images/hero.jpg" alt="A selection of organic products from nature" class="hero__img" />
+        </div>
+        <div class="hero__layer hero__layer--honey hero__enter--2">
+          <img src="images/honey.jpg" alt="Organic forest honey" class="hero__img" loading="lazy" />
+        </div>
+        <div class="hero__layer hero__layer--oil hero__enter--3">
+          <img src="images/oil.jpg" alt="Cold pressed groundnut oil" class="hero__img" loading="lazy" />
+        </div>
+        <div class="hero__layer hero__layer--turmeric hero__enter--4">
+          <img src="images/turmeric.jpg" alt="Organic turmeric powder" class="hero__img" loading="lazy" />
+        </div>
+        <div class="hero__layer hero__layer--almonds hero__enter--5">
+          <img src="images/almonds.jpg" alt="Premium almonds" class="hero__img" loading="lazy" />
+        </div>
+      </div>
+      <div class="hero__badge" aria-hidden="true">
+        <span class="hero__badge-num">100%</span>
+        <span class="hero__badge-label">Natural</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRUST STRIP ===================== -->
+<section class="trust-strip" aria-label="Why shop with us">
+  <div class="container trust-strip__grid">
+    <div class="trust-strip__item" appReveal>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M12 22V12"></path>
+        <path d="M12 12c0-5 4-8 9-8 0 5-4 8-9 8Z"></path>
+        <path d="M12 14c0-3-2-5-6-5 0 3 2 5 6 5Z"></path>
+      </svg>
+      <div>
+        <h3>100% Organic</h3>
+        <p>Pure &amp; Naturally Selected</p>
+      </div>
+    </div>
+    <div class="trust-strip__item" appReveal [revealDelay]="120">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z"></path>
+        <path d="m9 12 2 2 4-4"></path>
+      </svg>
+      <div>
+        <h3>Quality Assured</h3>
+        <p>Carefully Checked Products</p>
+      </div>
+    </div>
+    <div class="trust-strip__item" appReveal [revealDelay]="240">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5"></circle>
+        <path d="M4 12h16M12 4a14 14 0 0 1 0 16M12 4a14 14 0 0 0 0 16"></path>
+      </svg>
+      <div>
+        <h3>Natural Choices</h3>
+        <p>Better everyday choices</p>
+      </div>
+    </div>
+    <div class="trust-strip__item" appReveal [revealDelay]="360">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <path d="M12 20.5 4.8 13.3a4.6 4.6 0 0 1 0-6.5 4.6 4.6 0 0 1 6.5 0l.7.7.7-.7a4.6 4.6 0 0 1 6.5 6.5L12 20.5Z"></path>
+      </svg>
+      <div>
+        <h3>Trusted Products</h3>
+        <p>Selected with care</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATEGORIES ===================== -->
+<section class="section categories-section">
+  <div class="container">
+    <app-section-title eyebrow="Explore our range" title="Shop the Way Nature Grows." />
+    <div class="categories-flow">
+      @for (category of categories(); track category.slug; let i = $index) {
+        <app-category-card [category]="category" appReveal [revealDelay]="i * 90" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURED PRODUCTS ===================== -->
+<section class="section section--cream">
+  <div class="container">
+    <app-section-title eyebrow="Featured" title="Good Things, Worth Bringing Home." />
+    <div class="product-grid">
+      @for (product of featuredProducts(); track product.slug; let i = $index) {
+        <app-product-card [product]="product" appReveal [revealDelay]="i * 110" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY NEXT360 ===================== -->
+<section class="section section--sage why-section">
+  <div class="container">
+    <app-section-title eyebrow="Why NEXT360" title="Why NEXT360?" subtitle="Simple choices, made with nature." />
+    <div class="why-grid">
+      @for (benefit of benefits; track benefit.title; let i = $index) {
+        <div class="why">
+          <p class="why__number" appReveal>0{{ i + 1 }}</p>
+          <h3 appReveal [revealDelay]="90">{{ benefit.title }}</h3>
+          <p appReveal [revealDelay]="180">{{ benefit.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OUR STORY ===================== -->
+<section class="story-cinema" appReveal>
+  <img src="images/story.jpg" alt="" aria-hidden="true" class="story-cinema__img" loading="lazy" />
+  <div class="story-cinema__overlay" aria-hidden="true"></div>
+  <div class="container story-cinema__inner">
+    <p class="story-cinema__eyebrow">Our Story</p>
+    <h2>From the soil,<br />to your home.</h2>
+    <p class="story-cinema__text">We believe good products begin with good choices.</p>
+    <a routerLink="/about" class="btn btn--light story-cinema__cta">
+      Discover NEXT360
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6"></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== PROMOTION ===================== -->
+<section class="promo">
+  <img src="images/promo.jpg" alt="" aria-hidden="true" class="promo__bg" loading="lazy" />
+  <div class="promo__overlay" aria-hidden="true"></div>
+  <div class="container promo__inner" appReveal>
+    <h2>A Better Choice<br />Begins with Nature.</h2>
+    <p>Explore our organic collection.</p>
+    <a routerLink="/shop" class="btn btn--light">
+      Shop Now
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6"></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== BEST SELLERS ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="best-sellers__head">
+      <app-section-title eyebrow="Best sellers" title="Loved by Nature Lovers." [align]="'left'" />
+      <a routerLink="/shop" class="best-sellers__link">
+        View All Products
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+    </div>
+    <div class="product-grid product-scroll">
+      @for (product of bestSellers(); track product.slug; let i = $index) {
+        <app-product-card [product]="product" appReveal [revealDelay]="i * 110" />
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="section section--cream">
+  <div class="container">
+    <app-section-title eyebrow="Customer love" title="What Our Customers Say" />
+    <div class="testimonial" appReveal>
+      @for (t of testimonials; track t.name) {
+        @if ($index === activeTestimonial()) {
+          <figure class="testimonial__item" role="group" aria-roledescription="Testimonial" aria-live="polite">
+            <div class="testimonial__stars" aria-label="Rated {{ t.rating }} out of 5">
+              <span class="stars" aria-hidden="true">
+                <span class="stars__fill" [style.width.%]="100"></span>
+              </span>
+            </div>
+            <blockquote class="testimonial__quote">“{{ t.text }}”</blockquote>
+            <figcaption class="testimonial__author">
+              <strong>{{ t.name }}</strong>
+              <span>Verified Customer</span>
+            </figcaption>
+          </figure>
+        }
+      }
+      <div class="testimonial__controls">
+        <button class="testimonial__nav" (click)="prevTestimonial()" aria-label="Previous review">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M19 12H5M11 6l-6 6 6 6"></path>
+          </svg>
+        </button>
+        @for (t of testimonials; track t.name; let i = $index) {
+          <button
+            class="testimonial__dot"
+            [class.testimonial__dot--active]="i === activeTestimonial()"
+            (click)="goToTestimonial(i)"
+            [attr.aria-label]="'Show review ' + (i + 1)"
+          ></button>
+        }
+        <button class="testimonial__nav" (click)="nextTestimonial()" aria-label="Next review">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NEWSLETTER ===================== -->
+<app-newsletter />

@@ -1,0 +1,54 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a routerLink="/" class="footer__brand-link" aria-label="NEXT360 Organic Products — Home">
+          <img
+            src="images/logo.png"
+            alt="NEXT360 Organic Products"
+            class="footer__logo"
+            (error)="onLogoError($event)"
+          />
+        </a>
+        <p class="footer__tagline">Pure • Natural • Trusted</p>
+        <p class="footer__about">
+          Carefully selected organic products made with nature at heart.
+        </p>
+      </div>
+
+      <nav class="footer__col" aria-label="Shop links">
+        <h3>Shop</h3>
+        <a routerLink="/shop">All Products</a>
+        <a routerLink="/shop" [queryParams]="{ sort: 'newest' }">New Arrivals</a>
+        <a routerLink="/shop" [queryParams]="{ sort: 'bestsellers' }">Best Sellers</a>
+        <a routerLink="/categories">Categories</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Company links">
+        <h3>Company</h3>
+        <a routerLink="/about">Our Story</a>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/contact">Contact Us</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Help links">
+        <h3>Help</h3>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Follow us">
+        <h3>Follow</h3>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2026 NEXT360 Organic Products · All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>

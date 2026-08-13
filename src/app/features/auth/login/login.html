@@ -1,0 +1,41 @@
+<div class="auth">
+  <div class="auth__card">
+    <a routerLink="/" class="auth__brand" aria-label="NEXT360 Organic Products — Home">
+      <img src="images/logo.png" alt="NEXT360 Organic Products" (error)="onLogoError($event)" />
+    </a>
+
+    <h1>Welcome Back</h1>
+    <p class="auth__subtitle">Log in to continue your natural shopping.</p>
+
+    <form (submit)="submit($event)">
+      <div class="field">
+        <label for="login-email">Email</label>
+        <input id="login-email" class="input" type="email" name="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input
+          id="login-password"
+          class="input"
+          type="password"
+          name="password"
+          autocomplete="current-password"
+          required
+        />
+      </div>
+
+      @if (error()) {
+        <p class="form-error" role="alert">{{ error() }}</p>
+      }
+
+      <button class="btn btn--primary btn--block auth__submit" type="submit">Login</button>
+    </form>
+
+    <a href="#" class="auth__forgot">Forgot Password?</a>
+
+    <p class="auth__switch">
+      Don't have an account?
+      <a routerLink="/register">Create Account</a>
+    </p>
+  </div>
+</div>

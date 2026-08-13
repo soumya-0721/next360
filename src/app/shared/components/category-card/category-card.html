@@ -1,0 +1,20 @@
+<article class="category-card">
+  <a
+    class="category-card__link"
+    [routerLink]="['/categories', category().slug]"
+    [attr.aria-label]="category().name"
+  >
+    <div class="category-card__media">
+      <img [src]="category().image" [alt]="category().name" loading="lazy" class="category-card__image" />
+      <div class="category-card__overlay" aria-hidden="true"></div>
+      <span class="category-card__arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </span>
+    </div>
+    <div class="category-card__body">
+      <h3>{{ category().name }}</h3>
+    </div>
+  </a>
+</article>

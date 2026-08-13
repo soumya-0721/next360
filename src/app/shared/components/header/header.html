@@ -1,0 +1,138 @@
+<div class="announcement" role="region" aria-label="Announcement">
+  Naturally Better • Carefully Selected • Made for Everyday Living
+</div>
+
+<header class="header" [class.header--scrolled]="isScrolled()">
+  <div class="header__bar container">
+    <a routerLink="/" class="brand" aria-label="NEXT360 Organic Products — Home">
+      <img
+        src="images/logo.png"
+        alt="NEXT360 Organic Products"
+        class="brand__logo"
+        (error)="onLogoError($event)"
+      />
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/shop" routerLinkActive="active">Shop</a>
+      <a routerLink="/categories" routerLinkActive="active">Categories</a>
+      <a routerLink="/about" routerLinkActive="active">Our Story</a>
+      <a routerLink="/about" routerLinkActive="active">About Us</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    </nav>
+
+    <div class="actions">
+      <button
+        class="icon-btn"
+        (click)="toggleSearch()"
+        [attr.aria-expanded]="searchOpen()"
+        aria-label="Search products"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+      </button>
+
+      <a
+        routerLink="/shop"
+        [queryParams]="{ wishlist: true }"
+        class="icon-btn icon-btn--badge"
+        aria-label="View wishlist"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M12 20.5 4.8 13.3a4.6 4.6 0 0 1 0-6.5 4.6 4.6 0 0 1 6.5 0l.7.7.7-.7a4.6 4.6 0 0 1 6.5 6.5L12 20.5Z"></path>
+        </svg>
+        @if (wishlistService.count() > 0) {
+          <span class="icon-btn__badge" aria-hidden="true">{{ wishlistService.count() }}</span>
+        }
+      </a>
+
+      <a routerLink="/cart" class="icon-btn icon-btn--badge" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path d="M3 4h2l2.4 12.2a1.5 1.5 0 0 0 1.5 1.3h8.4a1.5 1.5 0 0 0 1.5-1.2L21 8H6"></path>
+          <circle cx="9.5" cy="20.5" r="1"></circle>
+          <circle cx="17" cy="20.5" r="1"></circle>
+        </svg>
+        @if (cartService.count() > 0) {
+          <span class="icon-btn__badge" aria-hidden="true">{{ cartService.count() }}</span>
+        }
+      </a>
+
+      @if (authService.isLoggedIn()) {
+        <button class="icon-btn" (click)="logout()" aria-label="Log out of {{ authService.user()?.name }}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5"></circle>
+            <path d="M5 20a7 7 0 0 1 14 0"></path>
+          </svg>
+        </button>
+      } @else {
+        <a routerLink="/login" class="btn btn--primary btn--sm login-btn">Login</a>
+      }
+
+      <button
+        class="hamburger"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-menu"
+        aria-label="Toggle navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  @if (searchOpen()) {
+    <div class="search-bar">
+      <form class="search-form container" (submit)="search()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+        <label class="sr-only" for="header-search">Search organic products</label>
+        <input
+          id="header-search"
+          type="search"
+          placeholder="Search organic products…"
+          autocomplete="off"
+          [value]="searchTerm()"
+          (input)="onSearchInput($event)"
+        />
+        <button class="btn btn--primary btn--sm" type="submit">Search</button>
+      </form>
+    </div>
+  }
+
+  @if (menuOpen()) {
+    <div id="mobile-menu" class="mobile-menu">
+      <nav class="mobile-menu__inner container" aria-label="Mobile navigation">
+        <form class="mobile-menu__search" (submit)="search()">
+          <label class="sr-only" for="mobile-search">Search organic products</label>
+          <input
+            id="mobile-search"
+            type="search"
+            placeholder="Search organic products…"
+            autocomplete="off"
+            [value]="searchTerm()"
+            (input)="onSearchInput($event)"
+          />
+        </form>
+        <a routerLink="/" (click)="closeMenu()">Home</a>
+        <a routerLink="/shop" (click)="closeMenu()">Shop</a>
+        <a routerLink="/categories" (click)="closeMenu()">Categories</a>
+        <a routerLink="/about" (click)="closeMenu()">Our Story</a>
+        <a routerLink="/about" (click)="closeMenu()">About Us</a>
+        <a routerLink="/contact" (click)="closeMenu()">Contact</a>
+        <a routerLink="/cart" (click)="closeMenu()">Cart</a>
+        @if (authService.isLoggedIn()) {
+          <a href="#" (click)="logout(); $event.preventDefault(); closeMenu()">Log out</a>
+        } @else {
+          <a routerLink="/login" (click)="closeMenu()">Login</a>
+        }
+      </nav>
+    </div>
+  }
+</header>

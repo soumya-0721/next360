@@ -1,0 +1,21 @@
+<div class="page-head">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a>
+      <span class="separator">/</span>
+      <span>Categories</span>
+    </nav>
+    <h1>Shop by Category</h1>
+    <p>Naturally selected. Thoughtfully delivered.</p>
+  </div>
+</div>
+
+<section class="categories">
+  <div class="container">
+    <div class="category-grid">
+      @for (category of categories(); track category.slug) {
+        <app-category-card [category]="category" />
+      }
+    </div>
+  </div>
+</section>

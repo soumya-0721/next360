@@ -1,0 +1,31 @@
+<section class="newsletter" aria-label="Newsletter signup">
+  <div class="container">
+    @if (subscribed()) {
+      <div class="newsletter__done" role="status">
+        <h2>Welcome to the family</h2>
+        <p>Thank you for subscribing. Expect a little more nature in your inbox soon.</p>
+      </div>
+    } @else {
+      <h2>Stay Close to Nature</h2>
+      <p>New products. Simple living. Thoughtful choices.</p>
+      <form class="newsletter__form" (submit)="subscribe($event)">
+        <label class="sr-only" for="newsletter-email">Email address</label>
+        <input
+          id="newsletter-email"
+          class="newsletter__input"
+          type="email"
+          name="email"
+          placeholder="Email address"
+          autocomplete="email"
+          required
+        />
+        <button class="btn btn--primary newsletter__button" type="submit">
+          Join Us
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </button>
+      </form>
+    }
+  </div>
+</section>

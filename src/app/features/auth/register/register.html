@@ -1,0 +1,60 @@
+<div class="auth">
+  <div class="auth__card">
+    <a routerLink="/" class="auth__brand" aria-label="NEXT360 Organic Products — Home">
+      <img src="images/logo.png" alt="NEXT360 Organic Products" (error)="onLogoError($event)" />
+    </a>
+
+    <h1>Create Account</h1>
+    <p class="auth__subtitle">Join NEXT360 for a more natural everyday life.</p>
+
+    <form (submit)="submit($event)">
+      <div class="field">
+        <label for="register-name">Full Name</label>
+        <input id="register-name" class="input" type="text" name="name" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="register-email">Email</label>
+        <input id="register-email" class="input" type="email" name="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="register-phone">Phone</label>
+        <input id="register-phone" class="input" type="tel" name="phone" autocomplete="tel" required />
+      </div>
+      <div class="field">
+        <label for="register-password">Password</label>
+        <input
+          id="register-password"
+          class="input"
+          type="password"
+          name="password"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="register-confirm">Confirm Password</label>
+        <input
+          id="register-confirm"
+          class="input"
+          type="password"
+          name="confirmPassword"
+          autocomplete="new-password"
+          minlength="6"
+          required
+        />
+      </div>
+
+      @if (error()) {
+        <p class="form-error" role="alert">{{ error() }}</p>
+      }
+
+      <button class="btn btn--primary btn--block auth__submit" type="submit">Create Account</button>
+    </form>
+
+    <p class="auth__switch">
+      Already have an account?
+      <a routerLink="/login">Login</a>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,217 @@
+@if (product(); as product) {
+  <div class="container product-page">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a>
+      <span class="separator">/</span>
+      <a routerLink="/shop">Shop</a>
+      <span class="separator">/</span>
+      <a [routerLink]="['/categories', product.category]">{{ product.categoryName }}</a>
+      <span class="separator">/</span>
+      <span>{{ product.name }}</span>
+    </nav>
+
+    <div class="product-detail">
+      <div class="product-detail__media">
+        <img [src]="product.image" [alt]="product.name" class="product-detail__image" />
+      </div>
+
+      <div class="product-detail__info">
+        @if (product.badge) {
+          <span class="badge badge--organic">{{ product.badge }}</span>
+        }
+
+        <h1>{{ product.name }}</h1>
+
+        <div class="product-detail__rating">
+          <span class="stars" aria-hidden="true">
+            <span class="stars__fill" [style.width.%]="ratingWidth()"></span>
+          </span>
+          <span class="product-detail__rating-value">{{ product.rating }}</span>
+          <span class="product-detail__rating-count">({{ product.reviewCount }} reviews)</span>
+        </div>
+
+        <div class="product-detail__price">
+          <span class="product-detail__price-current">₹{{ product.price | number }}</span>
+          @if (product.originalPrice) {
+            <span class="product-detail__price-old">₹{{ product.originalPrice | number }}</span>
+          }
+        </div>
+
+        <p class="product-detail__description">{{ product.description }}</p>
+
+        <ul class="product-detail__marks">
+          <li>Naturally sourced</li>
+          <li>Quality selected</li>
+          @if (product.inStock) {
+            <li>In stock</li>
+          }
+        </ul>
+
+        <div class="product-detail__buy">
+          <div class="qty" aria-label="Quantity">
+            <button class="qty__btn" (click)="decrement()" aria-label="Decrease quantity">−</button>
+            <span class="qty__value" aria-live="polite">{{ quantity() }}</span>
+            <button class="qty__btn" (click)="increment()" aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn--primary product-detail__add" (click)="addToCart()" [disabled]="!product.inStock">
+            {{ added() ? 'Added to Cart ✓' : 'Add to Cart' }}
+          </button>
+          <button class="btn btn--outline product-detail__buynow" (click)="buyNow()" [disabled]="!product.inStock">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion__item">
+        <button
+          class="accordion__toggle"
+          (click)="toggleSection('description')"
+          [attr.aria-expanded]="isOpen('description')"
+        >
+          Description
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        @if (isOpen('description')) {
+          <div class="accordion__panel">
+            <p>{{ product.description }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="accordion__item">
+        <button
+          class="accordion__toggle"
+          (click)="toggleSection('benefits')"
+          [attr.aria-expanded]="isOpen('benefits')"
+        >
+          Benefits
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        @if (isOpen('benefits')) {
+          <div class="accordion__panel">
+            <ul>
+              @for (benefit of product.benefits; track benefit) {
+                <li>{{ benefit }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+      <div class="accordion__item">
+        <button
+          class="accordion__toggle"
+          (click)="toggleSection('ingredients')"
+          [attr.aria-expanded]="isOpen('ingredients')"
+        >
+          Ingredients
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        @if (isOpen('ingredients')) {
+          <div class="accordion__panel">
+            <p>{{ product.ingredients }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="accordion__item">
+        <button
+          class="accordion__toggle"
+          (click)="toggleSection('usage')"
+          [attr.aria-expanded]="isOpen('usage')"
+        >
+          Usage
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        @if (isOpen('usage')) {
+          <div class="accordion__panel">
+            <p>{{ product.usage }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="accordion__item">
+        <button
+          class="accordion__toggle"
+          (click)="toggleSection('shipping')"
+          [attr.aria-expanded]="isOpen('shipping')"
+        >
+          Shipping Information
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        @if (isOpen('shipping')) {
+          <div class="accordion__panel">
+            <p>{{ product.shipping }}</p>
+          </div>
+        }
+      </div>
+
+      <div class="accordion__item">
+        <button
+          class="accordion__toggle"
+          (click)="toggleSection('reviews')"
+          [attr.aria-expanded]="isOpen('reviews')"
+        >
+          Reviews
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
+        @if (isOpen('reviews')) {
+          <div class="accordion__panel accordion__panel--reviews">
+            <div class="product-reviews__summary">
+              <strong class="product-reviews__score">{{ product.rating }}</strong>
+              <span class="stars" aria-hidden="true">
+                <span class="stars__fill" [style.width.%]="ratingWidth()"></span>
+              </span>
+              <span class="product-reviews__count">{{ product.reviewCount }} verified reviews</span>
+            </div>
+            <div class="product-reviews__list">
+              @for (review of reviews; track review.name) {
+                <div class="product-review">
+                  <div class="stars" aria-label="Rated {{ review.rating }} out of 5">
+                    <span class="stars__fill" [style.width.%]="100"></span>
+                  </div>
+                  <p>“{{ review.text }}”</p>
+                  <strong>{{ review.name }}</strong>
+                  <span class="product-review__verified">Verified Customer</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  @if (relatedProducts().length) {
+    <section class="related">
+      <div class="container">
+        <h2 class="related__title">You may also like</h2>
+        <div class="product-grid">
+          @for (product of relatedProducts(); track product.slug) {
+            <app-product-card [product]="product" />
+          }
+        </div>
+      </div>
+    </section>
+  }
+} @else {
+  <div class="container product-notfound">
+    <h2>Product not found</h2>
+    <p>The product you are looking for is no longer available.</p>
+    <a routerLink="/shop" class="btn btn--primary">Back to Shop</a>
+  </div>
+}

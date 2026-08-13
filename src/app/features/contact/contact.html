@@ -1,0 +1,73 @@
+<div class="page-head">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a>
+      <span class="separator">/</span>
+      <span>Contact</span>
+    </nav>
+    <h1>Get in Touch</h1>
+    <p>Have a question? We’d love to hear from you.</p>
+  </div>
+</div>
+
+<section class="contact">
+  <div class="container contact__layout">
+    <div class="contact__form-wrap">
+      @if (sent()) {
+        <div class="contact__done" role="status">
+          <h2>Thank you for reaching out</h2>
+          <p>Your message has been received. We will reply to you as soon as we can.</p>
+          <a routerLink="/" class="btn btn--primary">Back to Home</a>
+        </div>
+      } @else {
+        <form class="contact__form" (submit)="submit($event)">
+          <div class="field">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" class="input" type="text" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" class="input" type="email" name="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="contact-phone">Phone</label>
+            <input id="contact-phone" class="input" type="tel" name="phone" autocomplete="tel" />
+          </div>
+          <div class="field">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" class="textarea" name="message" required></textarea>
+          </div>
+          <button class="btn btn--primary" type="submit">Send Message</button>
+        </form>
+      }
+    </div>
+
+    <aside class="contact__info">
+      <h2>NEXT360 Organic Products</h2>
+      <p class="contact__tagline">Pure. Natural. Better.</p>
+
+      <ul class="contact__details">
+        <li>
+          <span class="contact__label">Email</span>
+          <a href="mailto:next360@gmail.com">next360@gmail.com</a>
+        </li>
+        <li>
+          <span class="contact__label">Phone</span>
+          <a href="tel:+918008253003">+91 80082 53003</a>
+        </li>
+        <li>
+          <span class="contact__label">Location</span>
+          <span>India</span>
+        </li>
+        <li>
+          <span class="contact__label">Working Hours</span>
+          <span>Mon – Sat, 9:00 AM – 6:00 PM</span>
+        </li>
+      </ul>
+
+      <p class="contact__note">
+        We usually reply within 24 hours on business days.
+      </p>
+    </aside>
+  </div>
+</section>
