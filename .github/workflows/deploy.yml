@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [next360-website]
   workflow_dispatch:
 
 permissions:
